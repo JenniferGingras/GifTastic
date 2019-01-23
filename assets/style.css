@@ -1,0 +1,37 @@
+/* 
+font-family: 'Righteous', cursive;
+font-family: 'VT323', monospace;
+font-family: 'Orbitron', sans-serif;
+*/
+
+header {
+  background-color: black;
+  padding: 1rem;
+  color: #80d4ff;
+  text-align: center;
+  border-bottom: 5px solid gray;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+}
+
+.searchButton {
+  margin: 0.5rem;
+  font-size: 0.75rem;
+  background-color: #ff66ff;
+  border: none;
+}
+
+.searchBox {
+  margin: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Righteous', cursive;
+}
+
+.nameButton {
+  margin: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #ccff66;
+  border: 3px dotted #29a3a3;
+  font-family: 'VT323', monospace;
+}
