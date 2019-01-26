@@ -3,7 +3,7 @@ $(document).ready(function () {
   // VARIABLES
   // API key = 4Q4vKw9r2o7hoV1Epz41X0wERRiKJl4u
   // "http://api.giphy.com/v1/gifs/search?q=" + searchWord + "&api_key=4Q4vKw9r2o7hoV1Epz41X0wERRiKJl4u&limit=10"
-  var buttonArr = ["Rainbow Bright", "Bill Nye", "Ninja Turtles", "Street Fighter", "Neverending Story", "Pee Wee's Playhouse", "MC Hammer",
+  var buttonArr = ["Rainbow Bright", "Bill Nye", "Ninja Turtles", "Street Fighter", "Mr. T", "Pee Wee's Playhouse", "MC Hammer",
     "Princess Bride", "Jem and the Holograms", "Lisa Franck", "Cyndi Lauper", "Saved by the Bell",
   ]
   var info = [];
@@ -30,58 +30,72 @@ $(document).ready(function () {
     event.preventDefault();
     var searchword = $(".keyword-input").val().trim();
     console.log(searchword);
-    // add the user input into an array
+    // add the user input into the array
     buttonArr.push(searchword);
     $(".gifButtons").empty();
     console.log(buttonArr);
-    // create a new button from the user input
+    // create the buttons from the new array with the added user search
     makeButtons();
   });
 
   // GET THE GIFS
   // --------------
-  $(".nameButton").on("click", function () {
+  // get the click event for the button
+  $(document).on("click", ".nameButton", function () {
     var keyword = $(this).attr("data-name");
     var keyword2 = keyword.replace(/\s/g, "+");
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + keyword2 + "&api_key=4Q4vKw9r2o7hoV1Epz41X0wERRiKJl4u&limit=10";
-
+    // use ajax to retrieve the gif data
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (response) {
       info = response.data;
       console.log(info);
-
+      // loop through the returned array to add each gif to the DOM
       for (var i = 0; i < info.length; i++) {
-        // info.forEach(function (gif) {
+        // gif and all related info is in it's own div
         var newDiv = $("<div>");
-        newDiv.addClass("col-md-4 card-column gif");
-        // var gifImage = $('<div class="card"><img src="' + info[i].images.fixed_height_still.url + '" data-state="still" class="gif card-img-top" alt="' + info[i].title + '"></div><div class="card-body"><h6 class="card-title">Rating: ' + info[i].rating.toUpperCase() + '</h6><p class="card-text">' + info[i].title + '</p></div>');
-        var gifImage = $('<img>').attr("src", info[i].images.fixed_height_still.url);
-        gifImage.attr("data-still", info[i].images.fixed_height_still.url);
-        gifImage.attr("data-animate", info[i].images.fixed_height.url);
-        gifImage.attr("data-state", "still");
-        newDiv.append(gifImage);
+        newDiv.addClass("gif-columns");
+        // the still and inimated states of the gif are added as attributes
+        var gifImage = $('<img>').attr("src", info[i].images.fixed_height_still.url).attr("data-still", info[i].images.fixed_height_still.url).attr("data-animate", info[i].images.fixed_height.url).attr("data-state", "still");
+        // a class is added so that it can be used in the click event below 
+        gifImage.addClass("image");
+        // text info that will display with it
+        var rating = $('<p>').text('Rating: ' + info[i].rating.toUpperCase());
+        var title = $('<p>').text(info[i].title);
+        // for each gif everything is added to the div
+        newDiv.append(gifImage, rating, title);
         $(".gifSpace").prepend(newDiv);
       }
     })
   });
 
-  // changing the state of the gif from still to animated (I tried to make this a separate click event, but couldn't get it to run unless it was in this function)
-  $('.gifSpace').on("click", ".gif", function () {
+  // changing the state of the gif from still to animated 
+  $(document).on("click", ".image", function () {
     console.log("I've been clicked");
     var state = $(this).attr("data-state");
+    console.log($(this).attr("data-state"))
+
     if (state === "still") {
-      $(this).attr("src", $(this).attr("data-animate"));
+      // change the attribute of the gif to the animated src attribute (which leads to the gif url)
+      $(this).attr("src", $(this).data("animate"));
+      // change the data-state to 'animate' so the else statement will work in reverse to the if
       $(this).attr("data-state", "animate");
+      console.log($(this).data("animate"));
     } else {
-      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("src", $(this).data("still"));
       $(this).attr("data-state", "still");
+      console.log($(this).data("still"));
     }
+  });
 
-  })
+  $(".clearButton").on("click", function (event) {
+    event.preventDefault();
+    $(".gifSpace").empty();
+  });
 
-  
+
 
 
 

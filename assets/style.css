@@ -2,26 +2,55 @@
 font-family: 'Righteous', cursive;
 font-family: 'VT323', monospace;
 font-family: 'Orbitron', sans-serif;
+#009999
+#e91b79 magenta
+#47dcc6 blue-green
+#c3fe1b bright-green
+#9564bd purple
 */
+
 body {
   font-family: monospace;
 }
 
 header {
-  background-color: black;
+  /* background-color: black; */
   padding: 1rem;
-  color: #80d4ff;
+  border-bottom: 6px solid #cc80ff;
+  background-image: linear-gradient(black, black, #8600b3, black);
+}
+
+h1 {
   text-align: center;
-  border-bottom: 5px solid gray;
+  color: rgb(174, 238, 238);
   font-family: 'Orbitron', sans-serif;
-  font-size: 30px;
+  font-size: 3rem;
+}
+
+h5 {
+  text-align: center;
+  color: #47dcc6;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+}
+
+#color-lines {
+  height: 2rem;
+  background-color: #ffff33;
+  border-top: 1rem solid #9564bd;
+  border-bottom: 0.75rem solid #47dcc6;
 }
 
 .searchButton {
   margin: 0.5rem;
   font-size: 0.75rem;
-  background-color: #ff66ff;
+  background-color: #e91b79;
   border: none;
+  color: white;
+}
+
+.searchButton:hover {
+  background-color: #ff66d9;
 }
 
 .searchBox {
@@ -34,12 +63,32 @@ header {
   margin: 0.5rem;
   font-size: 0.75rem;
   border-radius: 8px;
-  background-color: #ccff66;
-  border: 3px dotted #29a3a3;
+  background-color: #c3fe1b;
+  border: 3px dotted #66dbff;
   font-family: 'VT323', monospace;
   cursor: pointer;
 }
 
-.card-column {
+.nameButton:hover {
+  background-color: #47dcc6;
+}
+
+.gif-columns {
   display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-style: groove;
+  border-radius: 5px;
+}
+
+.clearButton {
+  margin: 0.5rem;
+  font-size: 0.75rem;
+  background-color: #8600b3;
+  border: none;
+  color: white;
+}
+
+.clearButton:hover {
+  background-color: #ffff33;
 }
