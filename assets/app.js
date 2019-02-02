@@ -44,7 +44,7 @@ $(document).ready(function () {
   $(document).on("click", ".nameButton", function () {
     var keyword = $(this).attr("data-name");
     var keyword2 = keyword.replace(/\s/g, "+");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + keyword2 + "&api_key=4Q4vKw9r2o7hoV1Epz41X0wERRiKJl4u&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + keyword2 + "&api_key=4Q4vKw9r2o7hoV1Epz41X0wERRiKJl4u&limit=10";
     // use ajax to retrieve the gif data
     $.ajax({
       url: queryURL,
